@@ -6,9 +6,12 @@ pipeline {
         VERCEL_PROJECT_NAME = 'devops18-quiz1'
     }
 
-    tools {
-        nodejs 'NodeJS' // ชื่อต้องตรงกับข้อ 2
-    }
+    stages {
+        stage('Test npm') {
+            steps {
+                sh 'npm install' // มันจะเรียกใช้ npm ที่เราเพิ่งลงไปเมื่อกี้
+            }
+        }
 
     stages {
         stage('Checkout') {
@@ -53,4 +56,5 @@ pipeline {
             echo '❌ Deploy FAILED'
         }
     }
+}
 }

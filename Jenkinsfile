@@ -5,7 +5,7 @@ pipeline {
     // เพราะเราลง manual ให้แล้ว
 
     environment {
-        VERCEL_TOKEN = credentials('vercel-token') // เช็ค ID ใน Credentials ให้ตรงนะครับ
+        VERCEL_TOKEN = credentials('vercel-tokens') // เช็ค ID ใน Credentials ให้ตรงนะครับ
     }
 
     stages {

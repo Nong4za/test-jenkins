@@ -1,13 +1,11 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:22-alpine' }
+    }
 
     environment {
         VERCEL_TOKEN = credentials('quiz1')
         VERCEL_PROJECT_NAME = 'devops18-quiz1'
-    }
-
-    tools {
-        nodejs 'NodeJS' 
     }
 
     stages {

@@ -1,60 +1,41 @@
 pipeline {
     agent any
+    
+    // ลบส่วน tools { nodejs 'NodeJS' } ทิ้งไปเลยครับ 
+    // เพราะเราลง manual ให้แล้ว
 
     environment {
-        VERCEL_TOKEN = credentials('quiz1')
-        VERCEL_PROJECT_NAME = 'devops18-quiz1'
+        VERCEL_TOKEN = credentials('vercel-token') // เช็ค ID ใน Credentials ให้ตรงนะครับ
     }
 
     stages {
         stage('Test npm') {
             steps {
-                sh 'npm install' // มันจะเรียกใช้ npm ที่เราเพิ่งลงไปเมื่อกี้
-            }
-        }
-
-    stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
-        stage('Check Node & npm') {
-            steps {
-                sh '''
-                    node --version
-                    npm --version
-                '''
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
+                // ตอนนี้ Jenkins จะใช้ npm ที่เราเพิ่งลงไปเมื่อกี้
                 sh 'npm install'
             }
         }
 
-        stage('Deploy to Vercel') {
+        stage('Build') {
             steps {
-                sh '''
-                    npx vercel deploy \
-                        --prod \
-                        --yes \
-                        --name $VERCEL_PROJECT_NAME \
-                        --token $VERCEL_TOKEN
-                '''
+                sh 'npm run build'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // คำสั่ง Deploy ไป Vercel
+                sh 'npx vercel --token $VERCEL_TOKEN --prod --yes'
             }
         }
     }
-
+    
     post {
-        success {
-            echo '✅ Deploy to Vercel SUCCESS'
-        }
         failure {
             echo '❌ Deploy FAILED'
         }
+        success {
+            echo '✅ Deploy SUCCESS'
+        }
     }
-}
 }

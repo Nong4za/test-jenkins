@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        VERCEL_TOKEN = credentials('vercel-token')
+        VERCEL_TOKEN = credentials('quiz1')
         VERCEL_PROJECT_NAME = 'devops18-quiz1'
     }
 

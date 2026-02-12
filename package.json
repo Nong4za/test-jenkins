@@ -1,0 +1,15 @@
+{
+  "name": "18-joke-generator",
+  "version": "1.0.0",
+  "description": "Joke Generator",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "engines": {
+    "node": ">=14.x"
+  }
+}

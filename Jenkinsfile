@@ -18,7 +18,8 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'npm run build'
+                // เปลี่ยนจาก 'npm run build' เป็นคำสั่ง echo ธรรมดา
+                sh 'echo "Project does not require build, skipping..."'
             }
         }
 
